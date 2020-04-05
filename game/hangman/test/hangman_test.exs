@@ -3,6 +3,6 @@ defmodule HangmanTest do
   doctest Hangman
 
   test "the truth" do
-    assert [ 1, 2, 3 ] == [ 1, 2, 3 ]
+    assert [1, 2, 3] == [1, 2, 3]
   end
 end

@@ -1,9 +1,9 @@
-defmodule Hangman.MixProject do
+defmodule TextClient.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :hangman,
+      app: :text_client,
       version: "0.1.0",
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
@@ -19,7 +19,7 @@ defmodule Hangman.MixProject do
 
   defp deps do
     [
-      { :dictionary, path: "../dictionary" },
+      hangman: [path: Path.expand("../hangman", __DIR__)]
     ]
   end
 end
