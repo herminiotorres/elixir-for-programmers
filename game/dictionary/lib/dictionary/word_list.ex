@@ -1,8 +1,12 @@
 defmodule Dictionary.WordList do
+  @me __MODULE__
 
-  def random_word(word_list) do
-    word_list
-    |> Enum.random()
+  def start_link() do
+    Agent.start_link(&word_list/0, name: @me)
+  end
+
+  def random_word() do
+    Agent.get(@me, &Enum.random/1)
   end
 
   def word_list do
