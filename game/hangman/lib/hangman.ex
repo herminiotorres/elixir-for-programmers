@@ -2,11 +2,11 @@ defmodule Hangman do
   alias Hangman.{Application, Server}
   @app __MODULE__.Supervisor
 
-  def new_name(player) do
+  def new_game(player) do
     Supervisor.start_child(@app, Server.child_spec(player))
   end
 
-  def new_name() do
+  def new_game() do
     Application.start(@app, [])
   end
 
