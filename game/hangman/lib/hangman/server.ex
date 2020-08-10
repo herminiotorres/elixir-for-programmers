@@ -1,10 +1,13 @@
 defmodule Hangman.Server do
+  use GenServer
   alias Hangman.Game
 
-  use GenServer
+  def start_link(player) do
+    GenServer.start_link(__MODULE__, nil, name: player)
+  end
 
   def start_link() do
-    GenServer.start_link(__MODULE__, nil)
+    GenServer.start_link(__MODULE__, nil, name: :guest)
   end
 
   def init(_) do
@@ -18,5 +21,16 @@ defmodule Hangman.Server do
 
   def handle_call({:tally}, _from, game) do
     {:reply, Game.tally(game), game}
+  end
+
+  def child_spec(player) do
+    %{
+      id: player,
+      start: {__MODULE__, :start_link, [player]}
+    }
+  end
+
+  def child_spec() do
+    %{id: :guest, start: {__MODULE__, :start_link, []}}
   end
 end
